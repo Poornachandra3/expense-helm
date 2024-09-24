@@ -5,21 +5,17 @@ metadata:
   labels:
     appName: {{ .Values.component }}
     projectName: {{ .Chart.Name }}
-    appVersion: {{ .Values.appVersion }}
 spec:
-  # modify replicas according to your case
   replicas: 2
   selector:
     matchLabels:
       appName: {{ .Values.component }}
       projectName: {{ .Chart.Name }}
-      appVersion: {{ .Values.appVersion }}
   template:
     metadata:
       labels:
       appName: {{ .Values.component }}
       projectName: {{ .Chart.Name }}
-      appVersion: {{ .Values.appVersion }}
     spec:
       {{ if.Values.initContainers.enabled }}
     volumes:
