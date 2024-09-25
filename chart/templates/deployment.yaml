@@ -18,16 +18,16 @@ spec:
         projectName: {{ .Chart.Name }}
     spec:
     {{ if .Values.initContainers.enabled }}
-    volumes:
-      - name: vault
-        emptyDir:
-          sizeLimit: 5Mi
+      volumes:
+        - name: vault
+          emptyDir:
+            sizeLimit: 5Mi
     initContainers:
       - name: vault
         image: 976739212096.dkr.ecr.us-east-1.amazonaws.com/vault-init-container:v2
         env:
           - name: VAULT_ADDR
-            value:  "https://vault-internal.poornachandra3.online:8200"
+            value: "https://vault-internal.poornachandra3.online:8200"
           - name: VAULT_TOKEN
             valueFrom:
               secretKeyRef:
@@ -46,11 +46,11 @@ spec:
           - mountPath: /data
             name: vault
     {{ end }}
-    containers:
-      - name: {{ .Values.component }}
-        image: 976739212096.dkr.ecr.us-east-1.amazonaws.com/{{ .Chart.Name }}-{{ .Values.component }}:{{ .Values.appVersion }}
+      containers:
+        - name: {{ .Values.component }}
+          image: 976739212096.dkr.ecr.us-east-1.amazonaws.com/{{ .Chart.Name }}-{{ .Values.component }}:{{ .Values.appVersion }}
     {{ if .Values.initContainers.enabled }}
-    volumeMounts:
-      - mountPath: /data
-        name: vault
+          volumeMounts:
+            - mountPath: /data
+              name: vault
     {{ end }}
