@@ -27,7 +27,7 @@ spec:
         image: 976739212096.dkr.ecr.us-east-1.amazonaws.com/vault-init-container:v2
         env:
           - name: VAULT_ADDR
-            value: "https://vault-internal.rdevops6a.online:8200"
+            value:  "https://vault-internal.poornachandra3.online:8200"
           - name: VAULT_TOKEN
             valueFrom:
               secretKeyRef:
